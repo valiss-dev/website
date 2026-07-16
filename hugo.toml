@@ -1,0 +1,8 @@
+baseURL = "https://valiss.dev/"
+locale = "en"
+title = "valiss"
+disableHugoGeneratorInject = true
+
+# Only the landing page and the registry-generated vanity pages exist; the
+# docs/spec sections arrive with ADR 0011.
+disableKinds = ["section", "taxonomy", "term", "rss", "sitemap"]

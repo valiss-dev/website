@@ -1,3 +1,6 @@
 .*
 !.gitignore
 !.nojekyll
+!.github
+public/
+resources/

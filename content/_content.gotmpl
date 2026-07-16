@@ -1,0 +1,14 @@
+{{/* One vanity page per Go module root, driven by data/vanity.yaml
+     (ADR 0016). The page path is the module path minus the valiss.dev/
+     host prefix, so valiss.dev/valiss publishes at /valiss/ and a future
+     valiss.dev/cli/valiss at /cli/valiss/. Rendered by layouts/vanity.html. */}}
+{{ range hugo.Data.vanity.modules }}
+  {{ $page := dict
+    "path" (strings.TrimPrefix "valiss.dev/" .module)
+    "kind" "page"
+    "layout" "vanity"
+    "title" .module
+    "params" (dict "module" .module "repo" .repo)
+  }}
+  {{ $.AddPage $page }}
+{{ end }}
