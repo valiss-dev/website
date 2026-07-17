@@ -54,8 +54,9 @@
 /*
  * Two-column hero: the pitch (badge, headline, subtitle, actions) on the left,
  * the terminal snippet on the right, so the wide home layout does not leave the
- * right half empty. Below ~62rem the columns wrap and stack, restoring the
- * single-column reading order on tablets and phones.
+ * right half empty. The columns wrap and stack once the content box drops below
+ * the flex-basis sum (~47rem inner, i.e. roughly an 800px viewport), restoring
+ * the single-column reading order on tablets and phones.
  */
 .valiss-hero {
   display: flex;
@@ -168,4 +169,19 @@
 /* Space consecutive feature sections on the Features page. */
 .valiss-section-heading + .hextra-feature-grid {
   margin-bottom: 2.5rem;
+}
+
+/* The secondary (outline) hero button carries an inline transparent background
+ * that beats the theme's :hover class on specificity, leaving it inert on hover.
+ * Restore a subtle theme-neutral hover fill. */
+.valiss-hero-actions a:last-child:hover {
+  background-color: rgba(120, 120, 130, 0.1) !important;
+}
+
+/* On phones the theme sizes section headings (text-4xl) the same as the hero H1,
+ * flattening the hierarchy; step them down so the H1 still leads. */
+@media (max-width: 640px) {
+  .valiss-section-heading h2 {
+    font-size: 1.5rem;
+  }
 }
