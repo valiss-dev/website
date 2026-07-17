@@ -191,7 +191,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
   >}}
   {{< hextra/feature-card
     icon="check-circle"
-    title="The interop<br>gate"
+    title="Interoperability<br>gates"
     subtitle="A live matrix runs server against client against transport across languages. A stable release must prove it interoperates with every other implementation before it can ship."
     link="/docs/versioning/"
   >}}
