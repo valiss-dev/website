@@ -1,0 +1,41 @@
+/*
+ * Navbar wordmark ("valiss", top left).
+ *
+ * Renders the site title as a terminal-style wordmark: enlarged and set in a
+ * monospace stack. Berkeley Mono Heavy is a commercial font and is referenced
+ * as a locally installed face only, never bundled or fetched over the network;
+ * the whole stack degrades to platform monospace defaults where those faces are
+ * not installed. Scope is the wordmark alone; the site-wide font is untouched.
+ */
+
+/*
+ * Local-only registration of the Berkeley Mono heavy face. src uses local()
+ * exclusively, so the browser resolves it from the user's installed fonts and
+ * issues no webfont request. This covers the case where the OS exposes the
+ * heavy cut under its own family name "Berkeley Mono Heavy"; the font-family
+ * stack below also lists "Berkeley Mono" so a system that registers the face as
+ * a weight of the base family is covered via font-weight.
+ */
+@font-face {
+  font-family: "Berkeley Mono Heavy";
+  src: local("Berkeley Mono Heavy"), local("BerkeleyMono-Heavy");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hextra-nav-container nav > a:first-child span {
+  font-family: "Berkeley Mono Heavy", "Berkeley Mono", "Ubuntu Mono",
+    ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Keep the wordmark from crowding the nav controls on narrow viewports. */
+@media (max-width: 480px) {
+  .hextra-nav-container nav > a:first-child span {
+    font-size: 1.3rem;
+  }
+}
