@@ -24,6 +24,25 @@
   font-display: swap;
 }
 
+/*
+ * Accent color. Hextra derives every --color-primary-* shade from these three
+ * variables (default hue 212/204 is blue); overriding them here recolors links,
+ * buttons, the active sidebar item, hero badges, and focus rings in one place.
+ * The green is set a touch darker on the white surface and brighter on the #111
+ * dark surface so link contrast holds in both themes.
+ */
+:root {
+  --primary-hue: 148deg;
+  --primary-saturation: 78%;
+  --primary-lightness: 38%;
+}
+
+.dark {
+  --primary-hue: 148deg;
+  --primary-saturation: 68%;
+  --primary-lightness: 52%;
+}
+
 .hextra-nav-container nav > a:first-child span {
   font-family: "Berkeley Mono Heavy", "Berkeley Mono", "Ubuntu Mono",
     ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
