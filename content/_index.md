@@ -3,8 +3,8 @@ title: valiss
 layout: hextra-home
 ---
 
-{{< hextra/hero-badge link="/spec/" >}}
-  SPEC-1 · Ed25519 wire format
+{{< hextra/hero-badge link="https://github.com/valiss-dev" >}}
+  Open source · MIT
 {{< /hextra/hero-badge >}}
 
 <div class="valiss-hero-headline">
