@@ -54,6 +54,12 @@
   letter-spacing: 0.12em;
 }
 
+/* On the dark surface the theme renders the title link in a muted gray; force
+   the wordmark to pure white so it reads at full strength. */
+.dark .hextra-nav-container nav > a:first-child span {
+  color: #fff;
+}
+
 /* Hold the wordmark steady on hover. The theme fades the title link to 75%
    opacity (hx:hover:opacity-75); keep it fully opaque so the mark does not
    dim or otherwise shift. */
