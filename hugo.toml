@@ -41,6 +41,12 @@ disableKinds = ["taxonomy", "term"]
 # attribute quotes are stripped.
 [minify]
   minifyOutput = true
+  # Keep attribute quotes. Without this the minifier unquotes space-free values
+  # (name="go-import" -> name=go-import), which the site workflow's vanity-meta
+  # grep matches literally; keeping quotes preserves those meta tags verbatim
+  # while whitespace is still stripped.
+  [minify.tdewolff.html]
+    keepQuotes = true
 
 # Hextra renders author-written HTML in Markdown (callouts, tabs); goldmark must
 # not strip it.
