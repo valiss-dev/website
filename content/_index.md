@@ -3,30 +3,86 @@ title: valiss
 layout: hextra-home
 ---
 
-{{< hextra/hero-headline >}}
-  valiss
-{{< /hextra/hero-headline >}}
+{{< hextra/hero-badge link="/spec/" >}}
+  SPEC-1 · Ed25519 wire format
+{{< /hextra/hero-badge >}}
 
-<div class="hx-mt-6 hx-mb-6">
+<div class="valiss-hero-headline">
+{{< hextra/hero-headline >}}
+  No auth server in the request path
+{{< /hextra/hero-headline >}}
+</div>
+
+<div class="valiss-hero-subtitle">
 {{< hextra/hero-subtitle >}}
-  Decentralized tenant authentication built on a chain of Ed25519 keys.<br class="sm:hx-block hx-hidden" />
-  One wire format, one implementation per language.
+  valiss is offline service auth. Every token verifies against one pinned Ed25519 public key: no introspection endpoint, no session store, and issuing credentials never touches production.
 {{< /hextra/hero-subtitle >}}
 </div>
 
-<div class="hx-mb-6">
-{{< hextra/hero-button text="Get started" link="/docs/" >}}
+<div class="valiss-hero-actions">
+{{< hextra/hero-button text="Get started" link="/docs/quickstart/" >}}
+{{< hextra/hero-button text="Read the introduction" link="/docs/introduction/" style="background-color: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor;" >}}
+</div>
+
+<div class="valiss-terminal">
+
+```sh
+go get valiss.dev/valiss
+```
+
+```go
+// Issue: the operator signs the account, the account signs the user.
+accountToken, _ := valiss.IssueAccount(operator, accountPub,
+    valiss.WithName("acme"), valiss.WithTTL(time.Hour))
+userToken, _ := valiss.IssueUser(account, userPub,
+    valiss.WithName("alice"), valiss.WithTTL(time.Hour))
+
+// Verify offline: the operator public key and the allowlist, no network call.
+acct, _ := valiss.VerifyAccount(accountToken, operatorPub)
+verifier := valiss.NewVerifier(operatorPub, valiss.NewStaticAllowlist(acct.ID))
+```
+
+</div>
+
+<div class="valiss-section-heading">
+{{< hextra/hero-section >}}What you get{{< /hextra/hero-section >}}
 </div>
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
-    title="Documentation"
-    subtitle="Quickstart, concepts, and guides for building with valiss."
-    link="/docs/"
+    icon="lock-closed"
+    title="Offline verification"
+    subtitle="Tokens verify against one pinned operator public key. No introspection endpoint, no session store, and no network call on the request path."
+    link="/docs/security/"
   >}}
   {{< hextra/feature-card
-    title="Specification"
-    subtitle="The valiss wire format and conformance model, SPEC-1."
-    link="/spec/"
+    icon="finger-print"
+    title="Proof of possession"
+    subtitle="By default a token authorizes nothing on its own. Each request is signed by the subject's own key, so a token captured off the wire is inert."
+    link="/docs/security/"
+  >}}
+  {{< hextra/feature-card
+    icon="shield-check"
+    title="Fail-closed allowlist"
+    subtitle="An account token is trusted only if its id is on the list you deposited. Revocation is removal, and it cuts off every user beneath the account."
+    link="/docs/concepts/allowlist/"
+  >}}
+  {{< hextra/feature-card
+    icon="puzzle"
+    title="Typed extension grants"
+    subtitle="Authorization rides signed, typed claims. The http and grpc transports enforce them fail-closed, and you can define your own domain extensions."
+    link="/docs/concepts/extensions/"
+  >}}
+  {{< hextra/feature-card
+    icon="refresh"
+    title="Epoch rotation"
+    subtitle="Publish a signed operator token at a new epoch and re-mint. Every token from an earlier epoch is rejected cryptographically, with no allowlist edits."
+    link="/docs/concepts/rotation/"
+  >}}
+  {{< hextra/feature-card
+    icon="code"
+    title="Go, Python, TypeScript"
+    subtitle="Go is the reference implementation. Python is a full client at parity. TypeScript ships the sign and verify primitives. All speak one wire spec."
+    link="/docs/introduction/"
   >}}
 {{< /hextra/feature-grid >}}

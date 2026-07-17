@@ -39,3 +39,100 @@
     font-size: 1.3rem;
   }
 }
+
+/*
+ * Landing and Features page styling.
+ *
+ * The hextra-home layout stacks content in a left-aligned flex column. These
+ * rules govern the marketing pages only (home and /features/); the docs and
+ * spec sections are untouched. Everything is theme-aware and self-contained:
+ * no webfonts, no external assets. Colours derive from currentColor or fixed
+ * values that read correctly on both the light and dark surfaces the theme
+ * ships.
+ */
+
+/* Give the hero its own vertical rhythm without depending on theme utility
+ * classes being present in the compiled Tailwind bundle. */
+.valiss-hero-headline {
+  margin-top: 1.5rem;
+  max-width: 40rem;
+}
+
+.valiss-hero-subtitle {
+  margin-top: 1.25rem;
+  margin-bottom: 2rem;
+  max-width: 42rem;
+}
+
+.valiss-features-lead {
+  margin-top: 0.5rem;
+}
+
+.valiss-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+/*
+ * Terminal-flavoured install and snippet block. The wrapper draws a framed
+ * window with the familiar three-dot title bar rendered entirely in CSS. The
+ * theme's own highlighted code blocks sit inside it and keep their copy
+ * buttons and syntax colours.
+ */
+.valiss-terminal {
+  position: relative;
+  width: 100%;
+  max-width: 46rem;
+  margin: 0 0 3rem;
+  padding: 2.75rem 1rem 1rem;
+  border: 1px solid rgba(120, 120, 130, 0.28);
+  border-radius: 0.75rem;
+  background: rgba(120, 120, 130, 0.05);
+}
+
+/* Three traffic-light dots via one pseudo-element and two box-shadows. */
+.valiss-terminal::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: 1.1rem;
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow: 1.15rem 0 0 #ffbd2e, 2.3rem 0 0 #27c93f;
+}
+
+/* A hairline under the title bar, drawn with a second pseudo-element so it
+ * spans the padded frame. */
+.valiss-terminal::after {
+  content: "";
+  position: absolute;
+  top: 2.25rem;
+  left: 0;
+  right: 0;
+  border-top: 1px solid rgba(120, 120, 130, 0.22);
+}
+
+/* Tighten the theme code blocks inside the frame so they read as one window. */
+.valiss-terminal .hextra-code-block,
+.valiss-terminal pre {
+  margin: 0;
+}
+
+.valiss-terminal .hextra-code-block + .hextra-code-block {
+  margin-top: 0.75rem;
+}
+
+/* Section headings on the marketing pages. */
+.valiss-section-heading {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Space consecutive feature sections on the Features page. */
+.valiss-section-heading + .hextra-feature-grid {
+  margin-bottom: 2.5rem;
+}

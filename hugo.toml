@@ -66,6 +66,12 @@ disableKinds = ["taxonomy", "term"]
     name = "Docs"
     pageRef = "/docs"
     weight = 1
+  # Weight 2 ties with Spec; Hugo breaks the tie by name, so Features sorts
+  # ahead of Spec without renumbering the entries other agents own.
+  [[menu.main]]
+    name = "Features"
+    pageRef = "/features"
+    weight = 2
   [[menu.main]]
     name = "Spec"
     pageRef = "/spec"
