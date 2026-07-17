@@ -115,8 +115,9 @@ disableKinds = ["taxonomy", "term"]
     displayTitle = true
     displayLogo = false
   [params.footer]
-    enable = true
+    enable = false
     displayCopyright = false
+    displayPoweredBy = false
   [params.editURL]
     enable = false
   # FlexSearch is Hextra's built-in offline search; index the full page content.

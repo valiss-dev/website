@@ -238,28 +238,24 @@
  */
 .valiss-theme-seg.hextra-theme-toggle-options {
   /* Cancel the dropdown menu's utility classes: fixed positioning, hidden
-     state, popover chrome. This container is now an inline segmented row. */
+     state, popover chrome. This container is now an inline segmented row with
+     no surrounding box, so it does not read as a second, taller pill beside the
+     search input; each segment is a bare button and only the active one fills. */
   position: static;
   inset: auto;
   display: inline-flex;
-  align-items: stretch;
+  align-items: center;
   gap: 2px;
   max-height: none;
   overflow: visible;
   margin: 0;
   min-width: 0;
-  padding: 2px;
-  border-radius: 8px;
-  border: 1px solid rgba(120, 120, 130, 0.28);
-  background: rgba(120, 120, 130, 0.08);
+  padding: 0;
+  border: 0;
+  background: transparent;
   box-shadow: none;
   font-size: 0.8125rem;
   line-height: 1;
-}
-
-.dark .valiss-theme-seg.hextra-theme-toggle-options {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .valiss-theme-seg .valiss-theme-seg-btn {
