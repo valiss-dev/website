@@ -51,6 +51,34 @@
  * ships.
  */
 
+/*
+ * Two-column hero: the pitch (badge, headline, subtitle, actions) on the left,
+ * the terminal snippet on the right, so the wide home layout does not leave the
+ * right half empty. Below ~62rem the columns wrap and stack, restoring the
+ * single-column reading order on tablets and phones.
+ */
+.valiss-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem 3rem;
+  width: 100%;
+  margin: 1rem 0 3rem;
+}
+
+.valiss-hero-main {
+  flex: 1 1 20rem;
+  min-width: 0;
+  max-width: 40rem;
+}
+
+.valiss-hero-aside {
+  flex: 1 1 24rem;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
 /* Give the hero its own vertical rhythm without depending on theme utility
  * classes being present in the compiled Tailwind bundle. */
 .valiss-hero-headline {
@@ -72,7 +100,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 3rem;
+  margin-bottom: 0;
 }
 
 /*
@@ -85,11 +113,16 @@
   position: relative;
   width: 100%;
   max-width: 46rem;
-  margin: 0 0 3rem;
+  margin: 0;
   padding: 2.75rem 1rem 1rem;
   border: 1px solid rgba(120, 120, 130, 0.28);
   border-radius: 0.75rem;
   background: rgba(120, 120, 130, 0.05);
+}
+
+/* Inside the two-column hero the terminal fills its column. */
+.valiss-hero-aside .valiss-terminal {
+  max-width: none;
 }
 
 /* Three traffic-light dots via one pseudo-element and two box-shadows. */
