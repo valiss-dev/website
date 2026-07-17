@@ -30,13 +30,41 @@
   font-weight: 800;
   font-size: 1.5rem;
   line-height: 1;
-  letter-spacing: -0.02em;
+  /* Open tracking so each glyph reads as its own unit and the boxed initial
+     does not crowd the next letter. inline-block is required for ::first-letter
+     to generate on this span (it does not on a purely inline box). */
+  letter-spacing: 0.16em;
+  display: inline-block;
+}
+
+/*
+ * Knock the initial "V" into a color-inverted tile: the box takes the
+ * wordmark's own foreground, the glyph is punched out in the page background.
+ * currentColor cannot carry the foreground into the box, because it would
+ * re-resolve against the pseudo-element's own (overridden) color, so both
+ * halves are pinned to Hextra's actual surface colors: light foreground is
+ * near-black on a white page, dark foreground is near-white on the #111 page
+ * (--color-dark). No graphics, no SVG.
+ */
+.hextra-nav-container nav > a:first-child span::first-letter {
+  background-color: #111;
+  color: #ffffff;
+  padding: 0.04em 0.14em;
+  border-radius: 0.12em;
+  /* The wordmark is lowercase; the boxed initial reads as a capital V tile. */
+  text-transform: uppercase;
+}
+
+.dark .hextra-nav-container nav > a:first-child span::first-letter {
+  background-color: #f2f2f2;
+  color: #111111;
 }
 
 /* Keep the wordmark from crowding the nav controls on narrow viewports. */
 @media (max-width: 480px) {
   .hextra-nav-container nav > a:first-child span {
     font-size: 1.3rem;
+    letter-spacing: 0.1em;
   }
 }
 
