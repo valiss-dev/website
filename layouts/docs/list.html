@@ -1,0 +1,51 @@
+{{- /*
+  Docs section list layout. Verbatim structure of Hextra v0.12.3 docs/list.html
+  (sidebar, TOC, breadcrumb, title, .Content, pager, comments) with one addition:
+  the docs section root (/docs/) renders a hub card grid after its intro prose.
+  The cards are curated navigation (they include a cross-section Specification
+  card to /spec/), so they live here in the website layout rather than in the
+  docs content, keeping the docs repo pure Markdown (ADR 0011). All other docs
+  sections (concepts, guides) and the spec section render unchanged.
+*/ -}}
+{{ define "main" }}
+  <div class='hx:mx-auto hx:flex hextra-max-page-width'>
+    {{ partial "sidebar.html" (dict "context" .) }}
+    {{ partial "toc.html" . }}
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
+        {{ partial "breadcrumb.html" (dict "page" . "enable" true) }}
+        <div class="content">
+          {{ if .Title }}
+          <div class="hx:flex hx:flex-col hx:sm:flex-row hx:items-start hx:sm:items-center hx:sm:justify-between hx:gap-4 hx:mb-4">
+            <h1 class="hx:mb-0">{{ .Title }}</h1>
+            {{ partial "components/page-context-menu" . }}
+          </div>
+          {{ end }}
+          {{ .Content }}
+          {{- if eq .RelPermalink "/docs/" -}}
+            {{- $cards := slice
+              (dict "title" "Quickstart"                   "link" "/docs/quickstart/"  "icon" "lightning-bolt"       "subtitle" "The shortest working setup in Go: create an operator, account, and user, mint a token, and verify it server-side.")
+              (dict "title" "Concepts"                     "link" "/docs/concepts/"    "icon" "light-bulb"           "subtitle" "The model, one concept per page: the key hierarchy, tokens, revocation, rotation, and authorization.")
+              (dict "title" "Guides"                       "link" "/docs/guides/"      "icon" "book-open"            "subtitle" "Wiring valiss into real code: Go, Python, TypeScript, and the language-neutral verification recipe.")
+              (dict "title" "Reference"                    "link" "/docs/reference/"   "icon" "library"              "subtitle" "The map to the Go API docs, the wire specification, and the conformance vectors.")
+              (dict "title" "Security model"               "link" "/docs/security/"    "icon" "shield-check"         "subtitle" "What the offline model protects, and where the protection ends.")
+              (dict "title" "Versioning and compatibility" "link" "/docs/versioning/"  "icon" "tag"                  "subtitle" "The wire-spec and library version axes, and how cross-language interop is gated.")
+              (dict "title" "Troubleshooting"              "link" "/docs/faq/"         "icon" "question-mark-circle" "subtitle" "Every verification rejection mapped from the symptom you see back to the cause.")
+              (dict "title" "Specification"                "link" "/spec/"             "icon" "document-text"        "subtitle" "The normative wire format and conformance model, SPEC-1.")
+            -}}
+            {{- $inner := "" -}}
+            {{- range $cards -}}
+              {{- $inner = printf "%s%s" $inner (partial "shortcodes/card" (dict "page" $ "link" .link "title" .title "icon" .icon "subtitle" .subtitle)) -}}
+            {{- end -}}
+            {{- partial "shortcodes/cards" (dict "cols" 3 "content" ($inner | safeHTML)) -}}
+          {{- end -}}
+        </div>
+        {{ partial "components/last-updated.html" . }}
+        {{- if (site.Params.page.displayPagination | default true) -}}
+          {{- partial "components/pager.html" . -}}
+        {{- end -}}
+        {{ partial "components/comments.html" . }}
+      </main>
+    </article>
+  </div>
+{{ end }}
