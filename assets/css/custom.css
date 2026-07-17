@@ -25,23 +25,22 @@
 }
 
 /*
- * Accent color: cyan/teal. Hextra derives every --color-primary-* shade from
- * these three variables (default hue 212/204 is blue); overriding them recolors
- * links, buttons, the active sidebar item, hero badges, focus rings, and the
- * wordmark tile in one place. On the white surface the accent is a deeper teal
- * so link text stays legible; on the #111 dark surface it opens to an electric
- * cyan.
+ * Accent color: the dark blue from hoa.moe (its --color-accent-emphasis,
+ * #0969da on light and #1f6feb on dark). Hextra derives every --color-primary-*
+ * shade from these three variables; overriding them recolors links, buttons,
+ * the active sidebar item, hero badges, and focus rings in one place. The
+ * lightness opens up on the #111 dark surface to keep link contrast.
  */
 :root {
-  --primary-hue: 188deg;
-  --primary-saturation: 90%;
-  --primary-lightness: 36%;
+  --primary-hue: 212deg;
+  --primary-saturation: 92%;
+  --primary-lightness: 44%;
 }
 
 .dark {
-  --primary-hue: 188deg;
-  --primary-saturation: 95%;
-  --primary-lightness: 50%;
+  --primary-hue: 216deg;
+  --primary-saturation: 84%;
+  --primary-lightness: 52%;
 }
 
 .hextra-nav-container nav > a:first-child span {
@@ -59,18 +58,13 @@
 }
 
 /*
- * Knock the initial "V" into an accent tile: the box is the accent green, built
- * from the same three --primary-* variables Hextra derives its palette from (so
- * the tile tracks any future accent change), and the glyph is punched out in the
- * page background, white on the light surface and #111 on the dark one. The fill
- * is composed here rather than via var(--color-primary-500): Tailwind inlines
- * that token at build and never emits it as a custom property, so referencing it
- * resolves to transparent. No graphics, no SVG.
+ * Knock the initial "V" into a neutral inverted tile: the box takes the page's
+ * own foreground surface, not the accent, and the glyph is punched out in the
+ * page background, white on the light surface and #111 on the dark one. No
+ * graphics, no SVG.
  */
 .hextra-nav-container nav > a:first-child span::first-letter {
-  background-color: hsl(
-    var(--primary-hue) var(--primary-saturation) var(--primary-lightness)
-  );
+  background-color: #111111;
   color: #ffffff;
   padding: 0.06em 0.16em;
   border-radius: 0.12em;
@@ -82,6 +76,7 @@
 }
 
 .dark .hextra-nav-container nav > a:first-child span::first-letter {
+  background-color: #f2f2f2;
   color: #111111;
 }
 

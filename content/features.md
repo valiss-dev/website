@@ -70,7 +70,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
 {{< hextra/hero-section >}}Revocation and rotation{{< /hextra/hero-section >}}
 </div>
 
-{{< hextra/feature-grid cols="2" >}}
+{{< hextra/feature-grid cols="4" >}}
   {{< hextra/feature-card
     icon="badge-check"
     title="Fail-closed allowlist"
