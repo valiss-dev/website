@@ -106,6 +106,11 @@ disableKinds = ["taxonomy", "term"]
   description = "Offline tenant authentication for services: every token verifies against one pinned Ed25519 public key. No introspection endpoint, no session store, no auth server in the request path."
   externalLinkDecoration = true
   images = ["/og.png"]
+  [params.theme]
+    # The theme switcher lives in the navbar (a single "theme-toggle" menu entry
+    # rendering the overridden segmented control). Suppress the theme module's
+    # default sidebar-bottom and footer toggles so exactly one switcher shows.
+    displayToggle = false
   [params.navbar]
     displayTitle = true
     displayLogo = false
