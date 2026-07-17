@@ -1,6 +1,7 @@
 ---
 title: Features
 layout: hextra-home
+description: "The capabilities of valiss's offline tenant-authentication model, each linked to the documentation that specifies it."
 ---
 
 <div class="valiss-hero-headline">
@@ -69,7 +70,7 @@ layout: hextra-home
 {{< hextra/hero-section >}}Revocation and rotation{{< /hextra/hero-section >}}
 </div>
 
-{{< hextra/feature-grid >}}
+{{< hextra/feature-grid cols="2" >}}
   {{< hextra/feature-card
     icon="badge-check"
     title="Fail-closed allowlist"
@@ -185,13 +186,13 @@ layout: hextra-home
   {{< hextra/feature-card
     icon="clipboard-check"
     title="Conformance vectors"
-    subtitle="A frozen, append-only corpus pairs each artifact with its expected outcome. Every implementation ships an offline runner that must pass all of them. The vectors are the arbiter of who diverged."
+    subtitle="A frozen, append-only corpus pairs each artifact with its expected outcome. Every implementation ships an offline runner that must pass all of them. The vectors decide which implementation diverged."
     link="/docs/versioning/"
   >}}
   {{< hextra/feature-card
     icon="check-circle"
     title="The interop gate"
-    subtitle="A live matrix runs server against client against transport across languages. A stable release cannot reach the frontier without first proving it interoperates with the whole frontier."
+    subtitle="A live matrix runs server against client against transport across languages. A stable release must prove it interoperates with every other implementation before it can ship."
     link="/docs/versioning/"
   >}}
 {{< /hextra/feature-grid >}}

@@ -1,6 +1,7 @@
 ---
 title: valiss
 layout: hextra-home
+description: "valiss is offline tenant authentication for services: every token verifies against one pinned Ed25519 public key, with no auth server in the request path."
 ---
 
 <div class="valiss-hero">
@@ -18,7 +19,7 @@ layout: hextra-home
 
 <div class="valiss-hero-subtitle">
 {{< hextra/hero-subtitle >}}
-  valiss is offline service auth. Every token verifies against one pinned Ed25519 public key: no introspection endpoint, no session store, and issuing credentials never touches production.
+  valiss is offline tenant authentication for services. Every token verifies against one pinned Ed25519 public key: no introspection endpoint, no session store, and issuing credentials never touches production.
 {{< /hextra/hero-subtitle >}}
 </div>
 
@@ -91,7 +92,7 @@ verifier := valiss.NewVerifier(operatorPub, valiss.NewStaticAllowlist(acct.ID))
   {{< hextra/feature-card
     icon="code"
     title="Go, Python, TypeScript"
-    subtitle="Go is the reference implementation. Python is a full client at parity. TypeScript ships the sign and verify primitives. All speak one wire spec."
+    subtitle="Go is the reference implementation. Python is a full client at parity. TypeScript ships the sign and verify primitives only, with no transport adapter yet. All speak one wire spec."
     link="/docs/"
   >}}
 {{< /hextra/feature-grid >}}
