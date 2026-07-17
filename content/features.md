@@ -135,8 +135,8 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
   >}}
   {{< hextra/feature-card
     icon="switch-vertical"
-    title="httpsig<br>and grpcsig"
-    subtitle="Contrib transports wire proof of origin end to end: a client mints a token per outgoing request, and a middleware or interceptor verifies it on the other side."
+    title="Signed HTTP<br>and gRPC"
+    subtitle="The httpsig and grpcsig contrib transports wire proof of origin end to end: a client mints a token per outgoing request, and a middleware or interceptor verifies it on the other side."
     link="/docs/concepts/messages/"
   >}}
   {{< hextra/feature-card
