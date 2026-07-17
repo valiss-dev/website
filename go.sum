@@ -8,6 +8,8 @@ github.com/valiss-dev/docs v0.0.0-20260717150946-818a1137a749 h1:nQZUuvhzhYlsyAh
 github.com/valiss-dev/docs v0.0.0-20260717150946-818a1137a749/go.mod h1:v87/8YFNNoA3aNiJHyrGkMfq2o3trXVt4cTPiGGRGvY=
 github.com/valiss-dev/docs v0.0.0-20260717152704-6f70c29f8069 h1:lezb4W3/Jp4ZV0sipAC1f9jkAFgcW25Omi7PH/e16mU=
 github.com/valiss-dev/docs v0.0.0-20260717152704-6f70c29f8069/go.mod h1:v87/8YFNNoA3aNiJHyrGkMfq2o3trXVt4cTPiGGRGvY=
+github.com/valiss-dev/docs v0.0.0-20260717154402-e25bd336d8f9 h1:NrU9AobZimKbBvgIsq4V/VPhqryxwUfs44jtsdUYu70=
+github.com/valiss-dev/docs v0.0.0-20260717154402-e25bd336d8f9/go.mod h1:v87/8YFNNoA3aNiJHyrGkMfq2o3trXVt4cTPiGGRGvY=
 github.com/valiss-dev/spec v0.0.0-20260715170708-06958028e198 h1:ahXllp/bBhkRYka9UoDCkjpP9QUATL/bLVWj2r1llGc=
 github.com/valiss-dev/spec v0.0.0-20260715170708-06958028e198/go.mod h1:LHW2aQNiMpJbuhEmw2NNEXzWwaQLNm09IDw3yx7TSDE=
 github.com/valiss-dev/spec v0.0.0-20260717132856-bc5be3972454 h1:L0P4TSC1NFQ/CtJppXATxthjB+sTJYdoejHCvGn7kBs=
