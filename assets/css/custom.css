@@ -60,13 +60,18 @@
 }
 
 /*
- * Knock the initial "V" into an accent tile: the box is the accent green
- * (--color-primary-500, the same variable links derive from, so it tracks any
- * future accent change), and the glyph is punched out in the page background,
- * white on the light surface and #111 on the dark one. No graphics, no SVG.
+ * Knock the initial "V" into an accent tile: the box is the accent green, built
+ * from the same three --primary-* variables Hextra derives its palette from (so
+ * the tile tracks any future accent change), and the glyph is punched out in the
+ * page background, white on the light surface and #111 on the dark one. The fill
+ * is composed here rather than via var(--color-primary-500): Tailwind inlines
+ * that token at build and never emits it as a custom property, so referencing it
+ * resolves to transparent. No graphics, no SVG.
  */
 .hextra-nav-container nav > a:first-child span::first-letter {
-  background-color: var(--color-primary-500);
+  background-color: hsl(
+    var(--primary-hue) var(--primary-saturation) var(--primary-lightness)
+  );
   color: #ffffff;
   padding: 0.06em 0.16em;
   border-radius: 0.12em;
