@@ -49,35 +49,9 @@
   font-weight: 800;
   font-size: 1.5rem;
   line-height: 1;
-  /* Full caps wordmark. Even tracking across the letters; inline-block is
-     required for ::first-letter to generate on this span (it does not on a
-     purely inline box). */
+  /* Full caps wordmark with even tracking across the letters. */
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  display: inline-block;
-}
-
-/*
- * Knock the initial "V" into a neutral inverted tile: the box takes the page's
- * own foreground surface, not the accent, and the glyph is punched out in the
- * page background, white on the light surface and #111 on the dark one. No
- * graphics, no SVG.
- */
-.hextra-nav-container nav > a:first-child span::first-letter {
-  background-color: #111111;
-  color: #ffffff;
-  padding: 0.06em 0.16em;
-  border-radius: 0.12em;
-  /* Reset tracking inside the tile so the glyph sits centered rather than being
-     shoved left by the wordmark's trailing letter-spacing; the gap to the rest
-     of the word is then a deliberate, even margin. */
-  letter-spacing: normal;
-  margin-right: 0.16em;
-}
-
-.dark .hextra-nav-container nav > a:first-child span::first-letter {
-  background-color: #f2f2f2;
-  color: #111111;
 }
 
 /* Hold the wordmark steady on hover. The theme fades the title link to 75%
