@@ -23,8 +23,9 @@ Site: {{ site.BaseURL }}
 {{ range where $ctx.RegularPages "Params.excludeSearch" "ne" true -}}
 {{- $link := .Permalink -}}
 {{- with .OutputFormats.Get "markdown" }}{{ $link = .Permalink }}{{ end -}}
-{{- $desc := cond (ne .Description "") .Description (.Summary | plainify) -}}
-- [{{ .Title }}]({{ $link }}){{ with $desc }}: {{ . | htmlUnescape | truncate 160 | strings.TrimSpace }}{{ end }}
+{{- $desc := "" -}}
+{{- with .Description }}{{ $desc = . }}{{ else }}{{ $desc = .Summary | plainify | truncate 160 }}{{ end -}}
+- [{{ .Title }}]({{ $link }}){{ with $desc }}: {{ . | htmlUnescape | strings.TrimSpace }}{{ end }}
 {{ end }}
 {{- range where $ctx.Sections "Params.excludeSearch" "ne" true -}}
 {{ template "llms-md-tree" (dict "context" . "level" (add $level 1)) }}
