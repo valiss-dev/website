@@ -1,0 +1,22 @@
+{{- /*
+  Returns a flat slice of pages in docs reading order: depth-first, weight-
+  ordered, starting at the given section, including the section index itself and
+  descending into subsections. This mirrors the sidebar tree, so a prev/next
+  pager built on it walks the same order a reader sees on the left. The
+  accumulator is threaded through recursion so only single pages are appended
+  (no slice-flattening assumptions).
+
+  @param {page} section  The section to walk.
+  @param {slice} order   Accumulator (omit at the top-level call).
+*/ -}}
+{{- $section := .section -}}
+{{- $order := .order | default slice -}}
+{{- $order = $order | append $section -}}
+{{- range (where (union $section.RegularPages $section.Sections) "Params.sidebar.exclude" "ne" true).ByWeight -}}
+  {{- if .IsSection -}}
+    {{- $order = partial "docs-nav-order.html" (dict "section" . "order" $order) -}}
+  {{- else -}}
+    {{- $order = $order | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $order -}}
