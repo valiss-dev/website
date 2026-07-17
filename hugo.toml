@@ -34,6 +34,14 @@ disableKinds = ["taxonomy", "term"]
       target = "content/spec"
       files = "/SPEC-*.md"
 
+# Minify the published HTML (CSS and JS are already minified and fingerprinted
+# by the theme's asset pipeline). Semantically inert for the vanity pages: the
+# go-import / go-source meta values sit in quoted attributes the minifier never
+# rewrites, so Go module resolution is unchanged; only whitespace and optional
+# attribute quotes are stripped.
+[minify]
+  minifyOutput = true
+
 # Hextra renders author-written HTML in Markdown (callouts, tabs); goldmark must
 # not strip it.
 [markup]
