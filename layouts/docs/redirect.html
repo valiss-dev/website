@@ -1,0 +1,20 @@
+{{- /* Redirect stub for the docs section root. The landing content moved to
+       /docs/introduction/; /docs/ redirects there client-side because GitHub
+       Pages has no server-side redirects. Self-contained (no theme chrome) to
+       avoid a styled flash. Selected via layout: redirect on the docs _index. */ -}}
+{{- $target := "" -}}
+{{- with .Site.GetPage "/docs/introduction" -}}{{ $target = .RelPermalink }}{{- end -}}
+{{- if not $target -}}{{ $target = relURL "docs/introduction/" }}{{- end -}}
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={{ $target }}">
+<link rel="canonical" href="{{ $target | absURL }}">
+<title>{{ .Title }}</title>
+</head>
+<body>
+Redirecting to <a href="{{ $target }}">{{ $target }}</a>.
+</body>
+</html>

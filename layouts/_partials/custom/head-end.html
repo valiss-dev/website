@@ -1,0 +1,7 @@
+{{- /* Advertise the page's raw-Markdown alternative to clients (LLM agents,
+       content negotiators). Emits only for pages that actually publish a
+       markdown output format, so the home page, the vanity redirect stubs, and
+       the 404 are naturally skipped. */ -}}
+{{- with .OutputFormats.Get "markdown" -}}
+  <link rel="alternate" type="text/markdown" href="{{ .Permalink }}" />
+{{- end -}}

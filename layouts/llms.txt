@@ -1,0 +1,31 @@
+{{- /* llms.txt index (llmstxt.org convention). Walks only the docs and spec
+       section trees, so the vanity redirect stubs, the home page, and the 404
+       never appear. Each entry links to the page's raw-Markdown output
+       (mediaType text/markdown), not the HTML permalink. */ -}}
+{{- $desc := site.Params.description | default "Decentralized tenant authentication built on a chain of Ed25519 keys. One wire format, one implementation per language." -}}
+# {{ site.Title }}
+
+> {{ $desc }}
+
+{{ range (slice (site.GetPage "/docs") (site.GetPage "/spec")) -}}
+{{- with . }}{{ template "llms-md-tree" (dict "context" . "level" 2) }}
+{{ end -}}
+{{- end -}}
+---
+Generated on {{ now.Format "2006-01-02 15:04:05 UTC" }}
+Site: {{ site.BaseURL }}
+
+{{- define "llms-md-tree" -}}
+{{- $ctx := .context -}}
+{{- $level := .level | default 2 -}}
+{{- $hashes := strings.Repeat $level "#" -}}
+{{ $hashes }} {{ $ctx.Title }}
+{{ range where $ctx.RegularPages "Params.excludeSearch" "ne" true -}}
+{{- $link := .Permalink -}}
+{{- with .OutputFormats.Get "markdown" }}{{ $link = .Permalink }}{{ end -}}
+- [{{ .Title }}]({{ $link }}){{ with .Summary }}: {{ . | plainify | truncate 120 | strings.TrimSpace }}{{ end }}
+{{ end }}
+{{- range where $ctx.Sections "Params.excludeSearch" "ne" true -}}
+{{ template "llms-md-tree" (dict "context" . "level" (add $level 1)) }}
+{{- end -}}
+{{- end -}}

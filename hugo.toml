@@ -39,6 +39,28 @@ disableKinds = ["taxonomy", "term"]
   [markup.highlight]
     noClasses = false
 
+# Output formats per page kind (Hextra idiom): every content page also publishes
+# a raw-Markdown alternative (mediaType text/markdown, layouts/*.markdown.md), the
+# home page publishes /llms.txt (index) and /llms-full.txt (concatenated corpus).
+# The vanity pages opt out per-page in content/_content.gotmpl (outputs = [html]);
+# the 404 is kind "404" and never picks up these formats.
+[outputs]
+  home = ["html", "llms", "llms-full"]
+  page = ["html", "markdown"]
+  section = ["html", "rss", "markdown"]
+
+# llms-full.txt: one plain-text file concatenating the docs and spec Markdown in
+# reading order. The theme ships "llms" and "markdown"; this adds the full corpus.
+[outputFormats]
+  [outputFormats.llms-full]
+    name = "llms-full"
+    baseName = "llms-full"
+    mediaType = "text/plain"
+    isPlainText = true
+
+# The navbar carries section switching (Docs, Spec), the FlexSearch box, and the
+# GitHub icon. A menu entry of type "search" is what renders the desktop navbar
+# search input; the docs/spec sidebars are generated from the section trees.
 [menu]
   [[menu.main]]
     name = "Docs"
@@ -49,8 +71,13 @@ disableKinds = ["taxonomy", "term"]
     pageRef = "/spec"
     weight = 2
   [[menu.main]]
-    name = "GitHub"
+    name = "Search"
     weight = 3
+    [menu.main.params]
+      type = "search"
+  [[menu.main]]
+    name = "GitHub"
+    weight = 4
     url = "https://github.com/valiss-dev"
     [menu.main.params]
       icon = "github"
@@ -64,3 +91,15 @@ disableKinds = ["taxonomy", "term"]
     displayCopyright = false
   [params.editURL]
     enable = false
+  # FlexSearch is Hextra's built-in offline search; index the full page content.
+  [params.search]
+    enable = true
+    type = "flexsearch"
+    [params.search.flexsearch]
+      index = "content"
+      tokenize = "forward"
+  # Surface the per-page "Copy / View as Markdown" control the theme wires into
+  # the docs layout; it links to the page's markdown output format.
+  [params.page]
+    [params.page.contextMenu]
+      enable = true
