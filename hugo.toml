@@ -96,6 +96,7 @@ disableKinds = ["taxonomy", "term"]
   # pages without their own. images drives og:image / twitter:image (a locally
   # generated card, static/og.png).
   description = "Offline tenant authentication for services: every token verifies against one pinned Ed25519 public key. No introspection endpoint, no session store, no auth server in the request path."
+  externalLinkDecoration = true
   images = ["/og.png"]
   [params.navbar]
     displayTitle = true
