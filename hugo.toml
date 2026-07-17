@@ -99,7 +99,17 @@ disableKinds = ["taxonomy", "term"]
       index = "content"
       tokenize = "forward"
   # Surface the per-page "Copy / View as Markdown" control the theme wires into
-  # the docs layout; it links to the page's markdown output format.
+  # the docs layout; it links to the page's markdown output format. The custom
+  # links open an LLM chat primed to read the page's raw-Markdown URL
+  # ({markdown_url} is URL-encoded by the theme's template-url partial).
   [params.page]
     [params.page.contextMenu]
       enable = true
+      [[params.page.contextMenu.links]]
+        name = "Open in ChatGPT"
+        icon = "chatgpt"
+        url = "https://chatgpt.com/?hints=search&q=Read+{markdown_url}+so+I+can+ask+questions+about+this+page."
+      [[params.page.contextMenu.links]]
+        name = "Open in Claude"
+        icon = "claude"
+        url = "https://claude.ai/new?q=Read+{markdown_url}+so+I+can+ask+questions+about+this+page."
