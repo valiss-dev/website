@@ -8,7 +8,7 @@
     "kind" "page"
     "layout" "vanity"
     "title" .module
-    "params" (dict "module" .module "repo" .repo)
+    "params" (dict "module" .module "repo" .repo "excludeSearch" true)
   }}
   {{ $.AddPage $page }}
 {{ end }}

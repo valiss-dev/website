@@ -3,6 +3,64 @@ locale = "en"
 title = "valiss"
 disableHugoGeneratorInject = true
 
-# Only the landing page and the registry-generated vanity pages exist; the
-# docs/spec sections arrive with ADR 0011.
-disableKinds = ["section", "taxonomy", "term", "rss", "sitemap"]
+# Taxonomies are unused; keep the empty term/taxonomy pages out of the build.
+disableKinds = ["taxonomy", "term"]
+
+# The site is assembled from Hugo Modules (ADR 0011, ADR 0018): the Hextra theme
+# plus the content repositories, mounted into the section tree.
+[module]
+  [module.hugoVersion]
+    min = "0.146.0"
+
+  [[module.imports]]
+    path = "github.com/imfing/hextra"
+
+  # docs repo: its content/ directory renders under /docs/.
+  [[module.imports]]
+    path = "github.com/valiss-dev/docs"
+    [[module.imports.mounts]]
+      source = "content"
+      target = "content/docs"
+
+  # spec repo: pure Markdown at the repo root renders under /spec/. The
+  # conformance vectors and repo metadata are not site content.
+  [[module.imports]]
+    path = "github.com/valiss-dev/spec"
+    [[module.imports.mounts]]
+      source = "."
+      target = "content/spec"
+      files = "/SPEC-*.md"
+
+# Hextra renders author-written HTML in Markdown (callouts, tabs); goldmark must
+# not strip it.
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    noClasses = false
+
+[menu]
+  [[menu.main]]
+    name = "Docs"
+    pageRef = "/docs"
+    weight = 1
+  [[menu.main]]
+    name = "Spec"
+    pageRef = "/spec"
+    weight = 2
+  [[menu.main]]
+    name = "GitHub"
+    weight = 3
+    url = "https://github.com/valiss-dev"
+    [menu.main.params]
+      icon = "github"
+
+[params]
+  [params.navbar]
+    displayTitle = true
+    displayLogo = false
+  [params.footer]
+    enable = true
+    displayCopyright = false
+  [params.editURL]
+    enable = false

@@ -1,0 +1,6 @@
+github.com/imfing/hextra v0.12.3 h1:DZHY2rUWYteyzjlHi9r4n7Bb5e2Q+6LXe4C1Dqn0ZjM=
+github.com/imfing/hextra v0.12.3/go.mod h1:vi+yhpq8YPp/aghvJlNKVnJKcPJ/VyAEcfC1BSV9ARo=
+github.com/valiss-dev/docs v0.0.0-20260717132117-56a9d1faad18 h1:JpZTeSkQiPVqS1onVxYTj7aSTV4MTXDJwQAK8sfZk9g=
+github.com/valiss-dev/docs v0.0.0-20260717132117-56a9d1faad18/go.mod h1:v87/8YFNNoA3aNiJHyrGkMfq2o3trXVt4cTPiGGRGvY=
+github.com/valiss-dev/spec v0.0.0-20260715170708-06958028e198 h1:ahXllp/bBhkRYka9UoDCkjpP9QUATL/bLVWj2r1llGc=
+github.com/valiss-dev/spec v0.0.0-20260715170708-06958028e198/go.mod h1:LHW2aQNiMpJbuhEmw2NNEXzWwaQLNm09IDw3yx7TSDE=
