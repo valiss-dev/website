@@ -3,6 +3,156 @@ locale = "en"
 title = "valiss"
 disableHugoGeneratorInject = true
 
-# Only the landing page and the registry-generated vanity pages exist; the
-# docs/spec sections arrive with ADR 0011.
-disableKinds = ["section", "taxonomy", "term", "rss", "sitemap"]
+# Publish a robots.txt (layouts/robots.txt) that advertises the sitemap.
+enableRobotsTXT = true
+
+# Taxonomies are unused; keep the empty term/taxonomy pages out of the build.
+disableKinds = ["taxonomy", "term"]
+
+# The site is assembled from Hugo Modules (ADR 0011, ADR 0018): the Hextra theme
+# plus the content repositories, mounted into the section tree.
+[module]
+  [module.hugoVersion]
+    min = "0.146.0"
+
+  [[module.imports]]
+    path = "github.com/imfing/hextra"
+
+  # docs repo: its content/ directory renders under /docs/.
+  [[module.imports]]
+    path = "github.com/valiss-dev/docs"
+    [[module.imports.mounts]]
+      source = "content"
+      target = "content/docs"
+
+  # spec repo: pure Markdown at the repo root renders under /spec/. The
+  # conformance vectors and repo metadata are not site content.
+  [[module.imports]]
+    path = "github.com/valiss-dev/spec"
+    [[module.imports.mounts]]
+      source = "."
+      target = "content/spec"
+      files = "/SPEC-*.md"
+
+# Minify the published HTML (CSS and JS are already minified and fingerprinted
+# by the theme's asset pipeline). Semantically inert for the vanity pages: the
+# go-import / go-source meta values sit in quoted attributes the minifier never
+# rewrites, so Go module resolution is unchanged; only whitespace and optional
+# attribute quotes are stripped.
+[minify]
+  minifyOutput = true
+  # Keep attribute quotes. Without this the minifier unquotes space-free values
+  # (name="go-import" -> name=go-import), which the site workflow's vanity-meta
+  # grep matches literally; keeping quotes preserves those meta tags verbatim
+  # while whitespace is still stripped.
+  [minify.tdewolff.html]
+    keepQuotes = true
+
+# Hextra renders author-written HTML in Markdown (callouts, tabs); goldmark must
+# not strip it.
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    noClasses = false
+
+# Output formats per page kind (Hextra idiom): every content page also publishes
+# a raw-Markdown alternative (mediaType text/markdown, layouts/*.markdown.md), the
+# home page publishes /llms.txt (index) and /llms-full.txt (concatenated corpus).
+# The vanity pages opt out per-page in content/_content.gotmpl (outputs = [html]);
+# the 404 is kind "404" and never picks up these formats.
+[outputs]
+  home = ["html", "llms", "llms-full"]
+  page = ["html", "markdown"]
+  section = ["html", "rss", "markdown"]
+
+# llms-full.txt: one plain-text file concatenating the docs and spec Markdown in
+# reading order. The theme ships "llms" and "markdown"; this adds the full corpus.
+[outputFormats]
+  [outputFormats.llms-full]
+    name = "llms-full"
+    baseName = "llms-full"
+    mediaType = "text/plain"
+    isPlainText = true
+
+# The navbar carries section switching (Docs, Spec), the FlexSearch box, and the
+# GitHub icon. A menu entry of type "search" is what renders the desktop navbar
+# search input; the docs/spec sidebars are generated from the section trees.
+[menu]
+  [[menu.main]]
+    name = "Docs"
+    pageRef = "/docs"
+    weight = 1
+  # Weight 2 ties with Spec; Hugo breaks the tie by name, so Features sorts
+  # ahead of Spec without renumbering the entries other agents own.
+  [[menu.main]]
+    name = "Features"
+    pageRef = "/features"
+    weight = 2
+  [[menu.main]]
+    name = "Spec"
+    pageRef = "/spec"
+    weight = 2
+  [[menu.main]]
+    name = "Search"
+    weight = 3
+    [menu.main.params]
+      type = "search"
+  # Always-visible Light/Dark/System segmented switcher in the navbar (the
+  # overridden theme-toggle partial). No "label" param, so the navbar renders it
+  # icon-only for a compact fit; the footer copy keeps its labels.
+  [[menu.main]]
+    name = "Theme"
+    weight = 4
+    [menu.main.params]
+      type = "theme-toggle"
+  [[menu.main]]
+    name = "GitHub"
+    weight = 5
+    url = "https://github.com/valiss-dev"
+    [menu.main.params]
+      icon = "github"
+
+[params]
+  # Site-wide meta and social-card description; the theme falls back to this for
+  # pages without their own. images drives og:image / twitter:image (a locally
+  # generated card, static/og.png).
+  description = "Offline tenant authentication for services: every token verifies against one pinned Ed25519 public key. No introspection endpoint, no session store, no auth server in the request path."
+  externalLinkDecoration = true
+  images = ["/og.png"]
+  [params.theme]
+    # The theme switcher lives in the navbar (a single "theme-toggle" menu entry
+    # rendering the overridden segmented control). Suppress the theme module's
+    # default sidebar-bottom and footer toggles so exactly one switcher shows.
+    displayToggle = false
+  [params.navbar]
+    displayTitle = true
+    displayLogo = false
+  [params.footer]
+    enable = false
+    displayCopyright = false
+    displayPoweredBy = false
+  [params.editURL]
+    enable = false
+  # FlexSearch is Hextra's built-in offline search; index the full page content.
+  [params.search]
+    enable = true
+    type = "flexsearch"
+    [params.search.flexsearch]
+      index = "content"
+      tokenize = "forward"
+  # Surface the per-page "Copy / View as Markdown" control the theme wires into
+  # the docs layout; it links to the page's markdown output format. The custom
+  # links open an LLM chat primed to read the page's raw-Markdown URL
+  # ({markdown_url} is URL-encoded by the theme's template-url partial).
+  [params.page]
+    [params.page.contextMenu]
+      enable = true
+      [[params.page.contextMenu.links]]
+        name = "Open in ChatGPT"
+        icon = "chatgpt"
+        url = "https://chatgpt.com/?hints=search&q=Read+{markdown_url}+so+I+can+ask+questions+about+this+page."
+      [[params.page.contextMenu.links]]
+        name = "Open in Claude"
+        icon = "claude"
+        url = "https://claude.ai/new?q=Read+{markdown_url}+so+I+can+ask+questions+about+this+page."

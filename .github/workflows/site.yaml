@@ -29,6 +29,12 @@ jobs:
     steps:
     - uses: actions/checkout@v7
 
+    # Hugo resolves the theme and the content repos as Hugo Modules (ADR 0011,
+    # ADR 0018), which it fetches through the Go toolchain.
+    - uses: actions/setup-go@v6
+      with:
+        go-version: stable
+
     - name: Install Hugo
       run: |
         curl -fsSL -o "$RUNNER_TEMP/hugo.tar.gz" \

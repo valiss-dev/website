@@ -1,0 +1,67 @@
+{{- /*
+  Docs section list layout. Verbatim structure of Hextra v0.12.3 docs/list.html
+  (sidebar, TOC, breadcrumb, title, .Content, pager, comments) with one addition:
+  the docs section root (/docs/) renders a hub card grid after its intro prose.
+  The cards are curated navigation (they include a cross-section Specification
+  card to /spec/), so they live here in the website layout rather than in the
+  docs content, keeping the docs repo pure Markdown (ADR 0011). All other docs
+  sections (concepts, guides) and the spec section render unchanged.
+*/ -}}
+{{ define "main" }}
+  <div class='hx:mx-auto hx:flex hextra-max-page-width'>
+    {{ partial "sidebar.html" (dict "context" .) }}
+    {{/* The hub landing has no in-page headings; skip the TOC so its rail is
+         not reserved empty on wide screens. */}}
+    {{ if ne .RelPermalink "/docs/" }}{{ partial "toc.html" . }}{{ end }}
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
+        {{ partial "breadcrumb.html" (dict "page" . "enable" true) }}
+        <div class="content">
+          {{ if .Title }}
+          <div class="hx:flex hx:flex-col hx:sm:flex-row hx:items-start hx:sm:items-center hx:sm:justify-between hx:gap-4 hx:mb-4">
+            <h1 class="hx:mb-0">{{ .Title }}</h1>
+            {{ partial "components/page-context-menu" . }}
+          </div>
+          {{ end }}
+          {{ .Content }}
+          {{- if eq .RelPermalink "/docs/" -}}
+            <h2 class="hx:mt-10 hx:mb-4 hx:text-2xl hx:font-semibold hx:tracking-tight hx:border-b hx:border-gray-200 hx:dark:border-neutral-800 hx:pb-2">Explore the documentation</h2>
+            {{- /* One card per top-level docs destination, generated from the
+                   section's own children (in sidebar/weight order) so new
+                   sections appear on the hub automatically, plus a cross-section
+                   card for the spec. Icons map by slug with a fallback;
+                   descriptions prefer front-matter, falling back to the summary. */ -}}
+            {{- $icons := dict
+                "quickstart" "lightning-bolt"
+                "concepts" "light-bulb"
+                "guides" "book-open"
+                "operations" "cog"
+                "security" "shield-check"
+                "versioning" "tag"
+                "troubleshooting" "question-mark-circle"
+                "faq" "question-mark-circle"
+                "project" "flag"
+                "comparison" "scale"
+                "reference" "library"
+            -}}
+            {{- $inner := "" -}}
+            {{- range (where (union .RegularPages .Sections) "Params.sidebar.exclude" "ne" true).ByWeight -}}
+              {{- $slug := path.Base .RelPermalink -}}
+              {{- $icon := index $icons $slug | default "document-text" -}}
+              {{- $desc := .Description -}}
+              {{- if not $desc -}}{{- $desc = .Summary | plainify | htmlUnescape | truncate 140 -}}{{- end -}}
+              {{- $inner = printf "%s%s" $inner (partial "shortcodes/card" (dict "page" $ "link" .RelPermalink "title" (.LinkTitle | default .Title) "icon" $icon "subtitle" $desc)) -}}
+            {{- end -}}
+            {{- $inner = printf "%s%s" $inner (partial "shortcodes/card" (dict "page" $ "link" "/spec/" "icon" "document-text" "title" "Specification" "subtitle" "The normative wire format and conformance model, SPEC-1.")) -}}
+            {{- partial "shortcodes/cards" (dict "cols" 3 "content" ($inner | safeHTML)) -}}
+          {{- end -}}
+        </div>
+        {{ partial "components/last-updated.html" . }}
+        {{- if (site.Params.page.displayPagination | default true) -}}
+          {{- partial "components/pager.html" . -}}
+        {{- end -}}
+        {{ partial "components/comments.html" . }}
+      </main>
+    </article>
+  </div>
+{{ end }}

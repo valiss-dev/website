@@ -1,0 +1,29 @@
+{{- /* llms-full.txt: the whole docs + spec corpus as one plain-text Markdown
+       stream, in reading order. Walks only the docs and spec section trees, so
+       the vanity stubs, home, and 404 are excluded. Each entry emits its title
+       as an H1 followed by the page's raw Markdown source. */ -}}
+# {{ site.Title }}
+
+> {{ site.Params.description | default "Full documentation corpus for LLM consumption." }}
+
+{{ range (slice (site.GetPage "/docs") (site.GetPage "/spec")) -}}
+{{- with . }}{{ template "llms-full-tree" (dict "context" .) }}
+{{- end -}}
+{{- end -}}
+
+{{- define "llms-full-tree" -}}
+{{- $ctx := .context -}}
+{{- with $ctx.RawContent }}
+{{ printf "# %s" $ctx.Title }}
+
+{{ . }}
+{{- end }}
+{{ range where $ctx.RegularPages "Params.excludeSearch" "ne" true }}
+{{ if not .Params.hideTitle }}{{ printf "# %s" .Title }}
+
+{{ end }}{{ .RawContent }}
+{{- end }}
+{{- range where $ctx.Sections "Params.excludeSearch" "ne" true -}}
+{{ template "llms-full-tree" (dict "context" .) }}
+{{- end -}}
+{{- end -}}

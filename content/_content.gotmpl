@@ -3,12 +3,16 @@
      host prefix, so valiss.dev/valiss publishes at /valiss/ and a future
      valiss.dev/cli/valiss at /cli/valiss/. Rendered by layouts/vanity.html. */}}
 {{ range hugo.Data.vanity.modules }}
+  {{/* Vanity pages are go-import redirect stubs, not site content: publish only
+       HTML (no markdown alternative), keep them out of search and the llms
+       index/corpus. */}}
   {{ $page := dict
     "path" (strings.TrimPrefix "valiss.dev/" .module)
     "kind" "page"
     "layout" "vanity"
     "title" .module
-    "params" (dict "module" .module "repo" .repo)
+    "outputs" (slice "html")
+    "params" (dict "module" .module "repo" .repo "excludeSearch" true "llms" false)
   }}
   {{ $.AddPage $page }}
 {{ end }}
