@@ -79,7 +79,7 @@ verifier := valiss.NewVerifier(operatorPub, valiss.NewStaticAllowlist(acct.ID))
   >}}
   {{< hextra/feature-card
     icon="puzzle"
-    title="Typed extension<br>grants"
+    title="Typed<br>extension grants"
     subtitle="Authorization rides signed, typed claims. The http and grpc transports enforce them fail-closed, and you can define your own domain extensions."
     link="/docs/concepts/extensions/"
   >}}
@@ -91,7 +91,7 @@ verifier := valiss.NewVerifier(operatorPub, valiss.NewStaticAllowlist(acct.ID))
   >}}
   {{< hextra/feature-card
     icon="code"
-    title="Go, Python,<br>TypeScript"
+    title="Go,<br>Python, TypeScript"
     subtitle="Go is the reference implementation. Python is a full client at parity. TypeScript ships the sign and verify primitives only, with no transport adapter yet. All speak one wire spec."
     link="/docs/"
   >}}

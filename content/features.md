@@ -29,7 +29,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
   >}}
   {{< hextra/feature-card
     icon="key"
-    title="One pinned<br>anchor"
+    title="One<br>pinned anchor"
     subtitle="A server pins a single value, the operator public key. NewVerifier(operatorPub, allowlist) is the whole trust configuration; it holds no seed."
     link="/docs/security/"
   >}}
@@ -79,7 +79,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
   >}}
   {{< hextra/feature-card
     icon="switch-horizontal"
-    title="Pluggable allowlist<br>sources"
+    title="Pluggable<br>allowlist sources"
     subtitle="The Allowlist interface is a single Allowed(jti) method. Back it with a file swapped atomically, a database query, a cache, or a fully dynamic per-call policy."
     link="/docs/concepts/allowlist/"
   >}}
@@ -91,7 +91,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
   >}}
   {{< hextra/feature-card
     icon="collection"
-    title="Multiple trusted<br>operators"
+    title="Multiple<br>trusted operators"
     subtitle="A keyring verifies messages and requests from several independent trust domains, each entry a self-signed operator token with its own name, epoch, and window."
     link="/docs/concepts/rotation/"
   >}}
@@ -104,7 +104,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
     icon="puzzle"
-    title="Typed extension<br>grants"
+    title="Typed<br>extension grants"
     subtitle="Authorization rides named extension claims: signed, typed payloads under the token's ext field. The same concrete type comes back out on the server, with no string plumbing."
     link="/docs/concepts/extensions/"
   >}}
@@ -116,7 +116,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
   >}}
   {{< hextra/feature-card
     icon="template"
-    title="Custom domain<br>extensions"
+    title="Custom<br>domain extensions"
     subtitle="Any struct with an ExtensionName method is signed opaquely and recovered as its concrete type in the handler. Optionally validate it inside the verification pipeline."
     link="/docs/concepts/extensions/"
   >}}
@@ -135,7 +135,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
   >}}
   {{< hextra/feature-card
     icon="switch-vertical"
-    title="Signed HTTP<br>and gRPC"
+    title="Signed<br>HTTP and gRPC"
     subtitle="The httpsig and grpcsig contrib transports wire proof of origin end to end: a client mints a token per outgoing request, and a middleware or interceptor verifies it on the other side."
     link="/docs/concepts/messages/"
   >}}
@@ -166,7 +166,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
   >}}
   {{< hextra/feature-card
     icon="cube"
-    title="Lean creds<br>or bundles"
+    title="Lean<br>creds or bundles"
     subtitle="User creds can omit the account token and let a server resolver supply it, or embed it as a self-contained bundle. Pick by where you would rather hold the account token."
     link="/docs/concepts/creds/"
   >}}
@@ -179,7 +179,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
     icon="code"
-    title="Go, Python,<br>TypeScript"
+    title="Go,<br>Python, TypeScript"
     subtitle="Go is the reference implementation. Python is a full client library at parity. TypeScript ships the sign and verify primitives from source, with no transport adapter yet."
     link="/docs/"
   >}}
