@@ -15,18 +15,18 @@ layout: hextra-home
 </div>
 
 <div class="hx-mb-6">
-{{< hextra/hero-button text="Get started" link="docs" >}}
+{{< hextra/hero-button text="Get started" link="/docs/" >}}
 </div>
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
     title="Documentation"
     subtitle="Quickstart, concepts, and guides for building with valiss."
-    link="docs"
+    link="/docs/"
   >}}
   {{< hextra/feature-card
     title="Specification"
     subtitle="The valiss wire format and conformance model, SPEC-1."
-    link="spec"
+    link="/spec/"
   >}}
 {{< /hextra/feature-grid >}}

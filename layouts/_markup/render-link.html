@@ -1,0 +1,38 @@
+{{- /*
+  Link render hook. Extends Hextra's default (which only rewrites root-relative
+  "/..." destinations) to also resolve page-relative Markdown links such as
+  "entities.md" or "../guides/go.md#anchor". The mounted docs content links
+  between pages by relative .md path; without this, those destinations reach the
+  browser verbatim and 404 against the pretty-URL tree.
+*/ -}}
+{{- $dest := .Destination -}}
+{{- $url := urls.Parse $dest -}}
+{{- $isExternal := hasPrefix $dest "http" -}}
+{{- $isNonPage := or $isExternal (hasPrefix $dest "mailto:") (hasPrefix $dest "tel:") -}}
+
+{{- if and $dest (not $isNonPage) $url.Path -}}
+  {{- with or (.PageInner.GetPage $url.Path) (.PageInner.Resources.Get $url.Path) (resources.Get $url.Path) -}}
+    {{- $query := cond (ne $url.RawQuery "") (printf "?%s" $url.RawQuery) "" -}}
+    {{- $fragment := cond (ne $url.Fragment "") (printf "#%s" $url.Fragment) "" -}}
+    {{- $dest = printf "%s%s%s" .RelPermalink $query $fragment -}}
+  {{- else -}}
+    {{- if hasPrefix $dest "/" -}}
+      {{- $hasBasePrefix := and (ne site.Home.RelPermalink "/") (hasPrefix $dest site.Home.RelPermalink) -}}
+      {{- if not $hasBasePrefix -}}
+        {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with . -}}
+<a href="{{ $dest | safeURL }}"
+   {{- with .Title -}}title="{{ . }}"{{- end -}}
+   {{- if $isExternal -}}target="_blank" rel="noopener"{{- end -}}
+>
+  {{- .Text | safeHTML -}}
+  {{- if and .Page.Site.Params.externalLinkDecoration $isExternal -}}
+    {{- partial "utils/icon.html" (dict "name" "arrow-up-right" "attributes" `class="hx:inline hx:rtl:rotate-270 hx:align-baseline" height="1em" aria-hidden="true"`) -}}
+  {{- end -}}
+</a>
+{{- end -}}
