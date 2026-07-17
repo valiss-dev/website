@@ -153,7 +153,7 @@ layout: hextra-home
   >}}
   {{< hextra/feature-card
     icon="key"
-    title="One-directional custody"
+    title="Unidirectional custody"
     subtitle="The seed is the secret and lives only on the signing side. The server holds an operator public key and an allowlist, never a seed, so a verifier compromise cannot leak signing power."
     link="/docs/concepts/creds/"
   >}}
