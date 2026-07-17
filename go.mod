@@ -4,6 +4,6 @@ go 1.26.5
 
 require (
 	github.com/imfing/hextra v0.12.3 // indirect
-	github.com/valiss-dev/docs v0.0.0-20260717154402-e25bd336d8f9 // indirect
+	github.com/valiss-dev/docs v0.0.0-20260717161536-20014a3bc0a2 // indirect
 	github.com/valiss-dev/spec v0.0.0-20260715170708-06958028e198 // indirect
 )
