@@ -61,37 +61,37 @@ verifier := valiss.NewVerifier(operatorPub, valiss.NewStaticAllowlist(acct.ID))
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
     icon="lock-closed"
-    title="Offline verification"
+    title="Offline<br>verification"
     subtitle="Tokens verify against one pinned operator public key. No introspection endpoint, no session store, and no network call on the request path."
     link="/docs/security/"
   >}}
   {{< hextra/feature-card
     icon="finger-print"
-    title="Proof of possession"
+    title="Proof of<br>possession"
     subtitle="By default a token authorizes nothing on its own. Each request is signed by the subject's own key, so a token captured off the wire is inert."
     link="/docs/security/"
   >}}
   {{< hextra/feature-card
     icon="shield-check"
-    title="Fail-closed allowlist"
+    title="Fail-closed<br>allowlist"
     subtitle="An account token is trusted only if its id is on the list you deposited. Revocation is removal, and it cuts off every user beneath the account."
     link="/docs/concepts/allowlist/"
   >}}
   {{< hextra/feature-card
     icon="puzzle"
-    title="Typed extension grants"
+    title="Typed extension<br>grants"
     subtitle="Authorization rides signed, typed claims. The http and grpc transports enforce them fail-closed, and you can define your own domain extensions."
     link="/docs/concepts/extensions/"
   >}}
   {{< hextra/feature-card
     icon="refresh"
-    title="Epoch rotation"
+    title="Epoch<br>rotation"
     subtitle="Publish a signed operator token at a new epoch and re-mint. Every token from an earlier epoch is rejected cryptographically, with no allowlist edits."
     link="/docs/concepts/rotation/"
   >}}
   {{< hextra/feature-card
     icon="code"
-    title="Go, Python, TypeScript"
+    title="Go, Python,<br>TypeScript"
     subtitle="Go is the reference implementation. Python is a full client at parity. TypeScript ships the sign and verify primitives only, with no transport adapter yet. All speak one wire spec."
     link="/docs/"
   >}}
