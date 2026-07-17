@@ -9,10 +9,16 @@
           {{/* hideTitle suppresses the theme's title heading for pages whose
                mounted Markdown already opens with its own H1 (e.g. the spec
                documents), avoiding a duplicate top-level heading. The .Title
-               still drives the <title> tag and breadcrumb. */}}
+               still drives the <title> tag and breadcrumb. The page context
+               menu (Copy/View as Markdown, Open in ChatGPT/Claude) is emitted
+               either way, so hideTitle pages like SPEC-1 keep it. */}}
           {{ if and .Title (not .Params.hideTitle) }}
           <div class="hx:flex hx:flex-col hx:sm:flex-row hx:items-start hx:sm:items-center hx:sm:justify-between hx:gap-4 hx:mb-4">
             <h1 class="hx:mb-0">{{ .Title }}</h1>
+            {{ partial "components/page-context-menu" . }}
+          </div>
+          {{ else }}
+          <div class="hx:flex hx:justify-end hx:mb-4">
             {{ partial "components/page-context-menu" . }}
           </div>
           {{ end }}

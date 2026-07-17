@@ -3,6 +3,12 @@ title: Features
 layout: hextra-home
 ---
 
+<div class="valiss-hero-headline">
+{{< hextra/hero-headline >}}
+  What valiss gives you
+{{< /hextra/hero-headline >}}
+</div>
+
 <div class="valiss-hero-subtitle valiss-features-lead">
 {{< hextra/hero-subtitle >}}
   valiss authenticates services offline against one pinned public key. Each capability below is a property of that model, linked to the documentation that specifies it.
