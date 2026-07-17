@@ -1,0 +1,43 @@
+{{- /*
+  valiss.dev override of Hextra's theme-toggle partial.
+
+  Presents the light/dark/system theme switch as an always-visible three-way
+  segmented control (Light / Dark / System), matching hoa.moe, in place of
+  Hextra's dropdown. Only the presentation changes; the three modes and their
+  behaviour are Hextra's.
+
+  The theme module's core JS (assets/js/core/theme.js) is reused unchanged. Its
+  contract, which this markup satisfies:
+    - it selects `.hextra-theme-toggle-options button[role=menuitemradio]`,
+      binds a click that calls switchTheme(button.dataset.item), and
+    - applyTheme() sets aria-checked="true" on the option whose data-item equals
+      the active theme (resolving "system" via matchMedia) and persists
+      localStorage "color-theme".
+  So the three buttons below MUST keep role="menuitemradio" and
+  data-item="light|dark|system" inside the hextra-theme-toggle-options
+  container. The dropdown toggle button (.hextra-theme-toggle) and the role=menu
+  keyboard handler are intentionally omitted: the core JS forEach over zero such
+  elements is a no-op, which simply removes the dropdown behaviour. The active
+  segment is styled from aria-checked in assets/css/custom.css (.valiss-theme-seg).
+*/ -}}
+{{- $hideLabel := .hideLabel -}}
+{{- $iconHeight := .iconHeight | default 14 -}}
+
+{{- $light := (T "light") | default "Light" -}}
+{{- $dark := (T "dark") | default "Dark" -}}
+{{- $system := (T "system") | default "System" -}}
+
+<div class="hextra-theme-toggle-options valiss-theme-seg{{ if $hideLabel }} valiss-theme-seg-icononly{{ end }}" data-theme="light">
+  <button type="button" role="menuitemradio" aria-checked="true" data-item="light" class="valiss-theme-seg-btn" aria-label="{{ $light }}" title="{{ $light }}">
+    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" (printf "height=%d" $iconHeight)) -}}
+    {{- if not $hideLabel }}<span class="valiss-theme-seg-label">{{ $light }}</span>{{ end -}}
+  </button>
+  <button type="button" role="menuitemradio" aria-checked="false" data-item="dark" class="valiss-theme-seg-btn" aria-label="{{ $dark }}" title="{{ $dark }}">
+    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" (printf "height=%d" $iconHeight)) -}}
+    {{- if not $hideLabel }}<span class="valiss-theme-seg-label">{{ $dark }}</span>{{ end -}}
+  </button>
+  <button type="button" role="menuitemradio" aria-checked="false" data-item="system" class="valiss-theme-seg-btn" aria-label="{{ $system }}" title="{{ $system }}">
+    {{- partial "utils/icon.html" (dict "name" "desktop-computer" "attributes" (printf "height=%d" $iconHeight)) -}}
+    {{- if not $hideLabel }}<span class="valiss-theme-seg-label">{{ $system }}</span>{{ end -}}
+  </button>
+</div>

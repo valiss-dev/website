@@ -84,9 +84,17 @@ disableKinds = ["taxonomy", "term"]
     weight = 3
     [menu.main.params]
       type = "search"
+  # Always-visible Light/Dark/System segmented switcher in the navbar (the
+  # overridden theme-toggle partial). No "label" param, so the navbar renders it
+  # icon-only for a compact fit; the footer copy keeps its labels.
+  [[menu.main]]
+    name = "Theme"
+    weight = 4
+    [menu.main.params]
+      type = "theme-toggle"
   [[menu.main]]
     name = "GitHub"
-    weight = 4
+    weight = 5
     url = "https://github.com/valiss-dev"
     [menu.main.params]
       icon = "github"
