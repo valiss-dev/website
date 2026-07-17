@@ -25,23 +25,22 @@
 }
 
 /*
- * Accent color: an acid green, the electric complement to the flakybin pink
- * (#ec4899, about hue 330). Hextra derives every --color-primary-* shade from
+ * Accent color: cyan/teal. Hextra derives every --color-primary-* shade from
  * these three variables (default hue 212/204 is blue); overriding them recolors
  * links, buttons, the active sidebar item, hero badges, focus rings, and the
- * wordmark tile in one place. Lightness is pulled down on the white surface so
- * the acid green stays legible as link text, and pushed up on the #111 dark
- * surface for the full neon pop.
+ * wordmark tile in one place. On the white surface the accent is a deeper teal
+ * so link text stays legible; on the #111 dark surface it opens to an electric
+ * cyan.
  */
 :root {
-  --primary-hue: 132deg;
-  --primary-saturation: 92%;
-  --primary-lightness: 40%;
+  --primary-hue: 188deg;
+  --primary-saturation: 90%;
+  --primary-lightness: 36%;
 }
 
 .dark {
-  --primary-hue: 132deg;
-  --primary-saturation: 96%;
+  --primary-hue: 188deg;
+  --primary-saturation: 95%;
   --primary-lightness: 50%;
 }
 
