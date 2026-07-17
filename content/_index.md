@@ -3,6 +3,9 @@ title: valiss
 layout: hextra-home
 ---
 
+<div class="valiss-hero">
+<div class="valiss-hero-main">
+
 {{< hextra/hero-badge link="https://github.com/valiss-dev" >}}
   Open source · MIT
 {{< /hextra/hero-badge >}}
@@ -24,6 +27,9 @@ layout: hextra-home
 {{< hextra/hero-button text="Read the docs" link="/docs/" style="background-color: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor;" >}}
 </div>
 
+</div>
+<div class="valiss-hero-aside">
+
 <div class="valiss-terminal">
 
 ```sh
@@ -42,6 +48,9 @@ acct, _ := valiss.VerifyAccount(accountToken, operatorPub)
 verifier := valiss.NewVerifier(operatorPub, valiss.NewStaticAllowlist(acct.ID))
 ```
 
+</div>
+
+</div>
 </div>
 
 <div class="valiss-section-heading">
