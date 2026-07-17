@@ -5,3 +5,5 @@
 modules:
   - module: valiss.dev/valiss
     repo: https://github.com/valiss-dev/valiss-go
+  - module: valiss.dev/cli/valiss
+    repo: https://github.com/valiss-dev/valiss-cli
