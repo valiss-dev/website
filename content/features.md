@@ -174,7 +174,7 @@ layout: hextra-home
     icon="code"
     title="Go, Python, TypeScript"
     subtitle="Go is the reference implementation. Python is a full client library at parity. TypeScript ships the sign and verify primitives from source, with no transport adapter yet."
-    link="/docs/introduction/"
+    link="/docs/"
   >}}
   {{< hextra/feature-card
     icon="clipboard-check"

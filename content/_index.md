@@ -21,7 +21,7 @@ layout: hextra-home
 
 <div class="valiss-hero-actions">
 {{< hextra/hero-button text="Get started" link="/docs/quickstart/" >}}
-{{< hextra/hero-button text="Read the introduction" link="/docs/introduction/" style="background-color: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor;" >}}
+{{< hextra/hero-button text="Read the docs" link="/docs/" style="background-color: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor;" >}}
 </div>
 
 <div class="valiss-terminal">
@@ -83,6 +83,6 @@ verifier := valiss.NewVerifier(operatorPub, valiss.NewStaticAllowlist(acct.ID))
     icon="code"
     title="Go, Python, TypeScript"
     subtitle="Go is the reference implementation. Python is a full client at parity. TypeScript ships the sign and verify primitives. All speak one wire spec."
-    link="/docs/introduction/"
+    link="/docs/"
   >}}
 {{< /hextra/feature-grid >}}
