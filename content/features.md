@@ -179,7 +179,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
     icon="code"
-    title="Go,<br>Python, TypeScript"
+    title="Go, Python,<br>TypeScript"
     subtitle="Go is the reference implementation. Python is a full client library at parity. TypeScript ships the sign and verify primitives from source, with no transport adapter yet."
     link="/docs/"
   >}}

@@ -91,7 +91,7 @@ verifier := valiss.NewVerifier(operatorPub, valiss.NewStaticAllowlist(acct.ID))
   >}}
   {{< hextra/feature-card
     icon="code"
-    title="Go,<br>Python, TypeScript"
+    title="Go, Python,<br>TypeScript"
     subtitle="Go is the reference implementation. Python is a full client at parity. TypeScript ships the sign and verify primitives only, with no transport adapter yet. All speak one wire spec."
     link="/docs/"
   >}}
