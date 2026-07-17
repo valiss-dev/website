@@ -85,6 +85,14 @@
   color: #111111;
 }
 
+/* Hold the wordmark steady on hover. The theme fades the title link to 75%
+   opacity (hx:hover:opacity-75); keep it fully opaque so the mark does not
+   dim or otherwise shift. */
+.hextra-nav-container nav > a:first-child:hover,
+.hextra-nav-container nav > a:first-child:focus {
+  opacity: 1;
+}
+
 /* Keep the wordmark from crowding the nav controls on narrow viewports. */
 @media (max-width: 480px) {
   .hextra-nav-container nav > a:first-child span {
