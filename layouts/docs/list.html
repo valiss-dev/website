@@ -25,21 +25,34 @@
           {{ end }}
           {{ .Content }}
           {{- if eq .RelPermalink "/docs/" -}}
-            {{- $cards := slice
-              (dict "title" "Quickstart"                   "link" "/docs/quickstart/"  "icon" "lightning-bolt"       "subtitle" "The shortest working setup in Go: create an operator, account, and user, mint a token, and verify it server-side.")
-              (dict "title" "Concepts"                     "link" "/docs/concepts/"    "icon" "light-bulb"           "subtitle" "The model, one concept per page: the key hierarchy, tokens, revocation, rotation, and authorization.")
-              (dict "title" "Guides"                       "link" "/docs/guides/"      "icon" "book-open"            "subtitle" "Wiring valiss into real code: Go, Python, TypeScript, and the language-neutral verification recipe.")
-              (dict "title" "Reference"                    "link" "/docs/reference/"   "icon" "library"              "subtitle" "The map to the Go API docs, the wire specification, and the conformance vectors.")
-              (dict "title" "Security model"               "link" "/docs/security/"    "icon" "shield-check"         "subtitle" "What the offline model protects, and where the protection ends.")
-              (dict "title" "Versioning and compatibility" "link" "/docs/versioning/"  "icon" "tag"                  "subtitle" "The wire-spec and library version axes, and how cross-language interop is gated.")
-              (dict "title" "Troubleshooting"              "link" "/docs/faq/"         "icon" "question-mark-circle" "subtitle" "Every verification rejection mapped from the symptom you see back to the cause.")
-              (dict "title" "Specification"                "link" "/spec/"             "icon" "document-text"        "subtitle" "The normative wire format and conformance model, SPEC-1.")
-            -}}
             <h2 class="hx:mt-10 hx:mb-4 hx:text-2xl hx:font-semibold hx:tracking-tight hx:border-b hx:border-gray-200 hx:dark:border-neutral-800 hx:pb-2">Explore the documentation</h2>
+            {{- /* One card per top-level docs destination, generated from the
+                   section's own children (in sidebar/weight order) so new
+                   sections appear on the hub automatically, plus a cross-section
+                   card for the spec. Icons map by slug with a fallback;
+                   descriptions prefer front-matter, falling back to the summary. */ -}}
+            {{- $icons := dict
+                "quickstart" "lightning-bolt"
+                "concepts" "light-bulb"
+                "guides" "book-open"
+                "operations" "cog"
+                "security" "shield-check"
+                "versioning" "tag"
+                "troubleshooting" "question-mark-circle"
+                "faq" "question-mark-circle"
+                "project" "flag"
+                "comparison" "scale"
+                "reference" "library"
+            -}}
             {{- $inner := "" -}}
-            {{- range $cards -}}
-              {{- $inner = printf "%s%s" $inner (partial "shortcodes/card" (dict "page" $ "link" .link "title" .title "icon" .icon "subtitle" .subtitle)) -}}
+            {{- range (where (union .RegularPages .Sections) "Params.sidebar.exclude" "ne" true).ByWeight -}}
+              {{- $slug := path.Base .RelPermalink -}}
+              {{- $icon := index $icons $slug | default "document-text" -}}
+              {{- $desc := .Description -}}
+              {{- if not $desc -}}{{- $desc = .Summary | plainify | htmlUnescape | truncate 140 -}}{{- end -}}
+              {{- $inner = printf "%s%s" $inner (partial "shortcodes/card" (dict "page" $ "link" .RelPermalink "title" (.LinkTitle | default .Title) "icon" $icon "subtitle" $desc)) -}}
             {{- end -}}
+            {{- $inner = printf "%s%s" $inner (partial "shortcodes/card" (dict "page" $ "link" "/spec/" "icon" "document-text" "title" "Specification" "subtitle" "The normative wire format and conformance model, SPEC-1.")) -}}
             {{- partial "shortcodes/cards" (dict "cols" 3 "content" ($inner | safeHTML)) -}}
           {{- end -}}
         </div>
