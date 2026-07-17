@@ -154,7 +154,7 @@ description: "The capabilities of valiss's offline tenant-authentication model, 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
     icon="document"
-    title="The creds<br>file"
+    title="Credential<br>files"
     subtitle="A marker-delimited text file packages a client's tokens and signing seed together, everything a client holds and nothing the server does. Parsing is strict and fails closed at the door."
     link="/docs/concepts/creds/"
   >}}
