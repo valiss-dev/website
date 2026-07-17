@@ -3,6 +3,9 @@ locale = "en"
 title = "valiss"
 disableHugoGeneratorInject = true
 
+# Publish a robots.txt (layouts/robots.txt) that advertises the sitemap.
+enableRobotsTXT = true
+
 # Taxonomies are unused; keep the empty term/taxonomy pages out of the build.
 disableKinds = ["taxonomy", "term"]
 
