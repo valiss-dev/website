@@ -30,10 +30,11 @@
   font-weight: 800;
   font-size: 1.5rem;
   line-height: 1;
-  /* Open tracking so each glyph reads as its own unit and the boxed initial
-     does not crowd the next letter. inline-block is required for ::first-letter
-     to generate on this span (it does not on a purely inline box). */
-  letter-spacing: 0.16em;
+  /* Full caps wordmark. Even tracking across the letters; inline-block is
+     required for ::first-letter to generate on this span (it does not on a
+     purely inline box). */
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   display: inline-block;
 }
 
@@ -49,10 +50,13 @@
 .hextra-nav-container nav > a:first-child span::first-letter {
   background-color: #111;
   color: #ffffff;
-  padding: 0.04em 0.14em;
+  padding: 0.06em 0.16em;
   border-radius: 0.12em;
-  /* The wordmark is lowercase; the boxed initial reads as a capital V tile. */
-  text-transform: uppercase;
+  /* Reset tracking inside the tile so the glyph sits centered rather than being
+     shoved left by the wordmark's trailing letter-spacing; the gap to the rest
+     of the word is then a deliberate, even margin. */
+  letter-spacing: normal;
+  margin-right: 0.16em;
 }
 
 .dark .hextra-nav-container nav > a:first-child span::first-letter {
