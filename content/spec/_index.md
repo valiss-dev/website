@@ -1,5 +1,6 @@
 ---
 title: Specification
+description: "The normative valiss wire specification, SPEC-1: token structure, signing and verification rules, and the extension registry."
 # Render the mounted spec documents with the docs layout so they get the same
 # sidebar, breadcrumb, and table of contents as the rest of the site instead of
 # the centered default single/list layout.
